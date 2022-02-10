@@ -6,20 +6,17 @@ var EventSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  date: {
-    type: String
-  },
-  longitude: {
-    type: String
-  },
-  latitude: {
-    type: String
+  location: {
+    type: { type: String },
+    coordinates: []
   },
   created_date: {
     type: Date,
     default: Date.now,
   },
 });
+
+EventSchema.index({ location: "2dsphere" });
 
 // Export Event model
 var Event = (module.exports = mongoose.model("Event", EventSchema));
